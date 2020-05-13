@@ -34,6 +34,21 @@ pipeline {
             }
             
         }
+        stage('Results') {
+
+      steps {
+
+        script {
+
+          LINK=GIT_URL.split(".git\$")[0]
+
+          //emailext mimeType: 'text/html', attachLog: true, body: "Build ${BUILD_NUMBER} for branch ${GIT_BRANCH} completed successfully. \nCommit: ${LINK}/commit/${GIT_COMMIT}", compressLog: false, recipientProviders: [requestor()], replyTo: biswajit.ghosh2@cognizant.com , subject: '${BUILD_TAG}', to: biswajit.ghosh2@cognizant.com
+
+}
+
+      }
+
+    }
         /*stage('Deploy') {
             steps {
                 sh """ scp -r target/my-app-1.0-SNAPSHOT.jar 18.236.137.164@ec2-user:/var/lib """
