@@ -31,12 +31,12 @@ pipeline {
             }
             
         }*/
-        /*stage('Deploy approval') {
+        stage('Deploy approval') {
             steps {
              input "Deploy to Prod"   
             }
             
-        }*/
+        }
         //https://issues.jenkins-ci.org/browse/JENKINS-27295
 
 //DEPLOY_SQL=DEPLOY_SQL=="false/fasle"
@@ -53,7 +53,7 @@ pipeline {
 
 //Approval gate
 
-stage('Deploy approval'){
+/*stage('Deploy approval'){
 
   if (CONTROLLED_ENVIRONMENTS.contains(ENVIRONMENT)){
 
@@ -75,7 +75,7 @@ stage('Deploy approval'){
 
   }
 
-}
+}*/
 
  
         stage('Results') {
