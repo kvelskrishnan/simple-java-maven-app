@@ -28,6 +28,17 @@ pipeline {
             }
             
         }*/
+        stage('Deploy approval') {
+            steps {
+             input "Deploy to Prod"   
+            }
+            node {
+                stage ('deploy to prod') {
+                    echo "deploying"
+                }
+            }
+            
+        }
         /*stage('Deploy') {
             steps {
                 sh """ scp -r target/my-app-1.0-SNAPSHOT.jar 18.236.137.164@ec2-user:/var/lib """
