@@ -32,11 +32,6 @@ pipeline {
             steps {
              input "Deploy to Prod"   
             }
-            node {
-                stage ('deploy to prod') {
-                    echo "deploying"
-                }
-            }
             
         }
         /*stage('Deploy') {
