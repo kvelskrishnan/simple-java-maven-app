@@ -22,9 +22,10 @@ pipeline {
                 }
             }
         }
-        /*stage('Deliver') {
+        /*stage('Deploy') {
             steps {
-                sh './jenkins/scripts/deliver.sh'
+                sh """ scp -r target/my-app-1.0-SNAPSHOT.jar 18.236.137.164@ec2-user:/var/lib """
+                
             }
         }*/
     }
