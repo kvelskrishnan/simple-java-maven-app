@@ -22,6 +22,12 @@ pipeline {
                 }
             }
         }
+        /*stage('Sonarqube') {
+            steps {
+             sh 'Publish results to sonarqube'   
+            }
+            
+        }*/
         /*stage('Deploy') {
             steps {
                 sh """ scp -r target/my-app-1.0-SNAPSHOT.jar 18.236.137.164@ec2-user:/var/lib """
