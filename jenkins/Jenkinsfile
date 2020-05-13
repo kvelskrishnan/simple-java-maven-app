@@ -31,12 +31,53 @@ pipeline {
             }
             
         }*/
-        stage('Deploy approval') {
+        /*stage('Deploy approval') {
             steps {
              input "Deploy to Prod"   
             }
             
-        }
+        }*/
+        //https://issues.jenkins-ci.org/browse/JENKINS-27295
+
+//DEPLOY_SQL=DEPLOY_SQL=="false/fasle"
+
+//DEPLOY_LAMBDA=DEPLOY_LAMBDA=="true/false"
+
+//DEPLOY_App=”false/true”
+
+ 
+
+def CONTROLLED_ENVIRONMENTS = ['prod','stage’,'test']
+
+ 
+
+//Approval gate
+
+stage('Deploy approval'){
+
+  if (CONTROLLED_ENVIRONMENTS.contains(ENVIRONMENT)){
+
+        emailext attachLog: false,
+
+                       body: "Deployment ${JOB_BASE_NAME} requires approval for the ${ENVIRONMENT} environment. ${BUILD_URL}input",
+
+                       replyTo: 'techops@lifescan.com',
+
+                       subject: "Approval required for ${ENVIRONMENT} environment in ${JOB_BASE_NAME}",
+
+                       to: APPROVER_LIST
+
+        def feedback = input submitter: APPROVER_LIST, message: "This will deploy to the controlled environment $ENVIRONMENT"
+
+  } else{
+
+               echo "Deployment to ${ENVIRONMENT} does not require approval."
+
+  }
+
+}
+
+ 
         stage('Results') {
 
       steps {
