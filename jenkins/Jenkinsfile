@@ -33,7 +33,8 @@ pipeline {
         }*/
         stage('Deploy approval') {
             steps {
-             input "Deploy to Prod"   
+             input "Deploy to Prod"
+             deploy adapters: [tomcat7(credentialsId: 'deployer_user', path: '', url: 'http://18.236.137.164:8080/')], contextPath: null, war: ' **/*.war'
             }
             
         }
