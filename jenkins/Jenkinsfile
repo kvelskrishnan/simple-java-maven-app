@@ -1,11 +1,12 @@
+
 pipeline {
     agent any
-    triggers {
-         pollSCM('* * * * *')       
-    }
+    /*triggers {
+         pollSCM ('* * * * *')       
+    }*/
     parameters {							
         
-	    string(name: 'Branch/Repo', defaultValue: '', description: 'Specify the branch name to build from')
+	    string(name: 'Branch/Repo', defaultValue: '', description: 'Specify the branch name')
 		booleanParam(name: 'Build Type = Application', defaultValue: false, description: '')
         booleanParam(name: 'Build Type = DB', defaultValue: false, description: '')
         booleanParam(name: 'Build Type = Lambda', defaultValue: false, description: '')
@@ -16,7 +17,7 @@ pipeline {
     stages {
         stage('checkout') {
             steps {
-                checkout([$class: 'GitSCM', branches: [[name: '*/developer']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/kvelskrishnan/simple-java-maven-app.git']]])
+                checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/kvelskrishnan/simple-java-maven-app.git']]])
             }
         }
         
@@ -42,23 +43,14 @@ pipeline {
             }
             
         }*/
-	/*def CONTROLLED_Environment = ['Test','Stage','Prod']*/
-	    stage('Deploy approval'){ 
-		    /*{
-		 if (CONTROLLED_Environment.contains(Environment))*/
-			  steps  {
-			 input "Deploy to Prod"   
+        stage('Deploy approval') {
+            steps {
+             input "Deploy to Prod"
+             
             }
-		/*else{
-
-               echo "Deployment to ${Environment} does not require approval."
-
-  }
-		    
-		
             
-        }*/
-        /*test_run*/
+        }
+        /*test_run_1*/
         //https://issues.jenkins-ci.org/browse/JENKINS-27295
 
 //DEPLOY_SQL=DEPLOY_SQL=="false/fasle"
@@ -68,30 +60,24 @@ pipeline {
 //DEPLOY_App=”false/true”
 
  
+
+/*def CONTROLLED_ENVIRONMENTS = ['prod','stage’,'test']*/
+
+ 
+
 //Approval gate
 
 /*stage('Deploy approval'){
-
   if (CONTROLLED_ENVIRONMENTS.contains(ENVIRONMENT)){
-
         emailext attachLog: false,
-
                        body: "Deployment ${JOB_BASE_NAME} requires approval for the ${ENVIRONMENT} environment. ${BUILD_URL}input",
-
                        replyTo: 'techops@lifescan.com',
-
                        subject: "Approval required for ${ENVIRONMENT} environment in ${JOB_BASE_NAME}",
-
                        to: APPROVER_LIST
-
         def feedback = input submitter: APPROVER_LIST, message: "This will deploy to the controlled environment $ENVIRONMENT"
-
   } else{
-
                echo "Deployment to ${ENVIRONMENT} does not require approval."
-
   }
-
 }*/
 
  
@@ -117,5 +103,4 @@ pipeline {
             }
         }*/
     }
-}
 }
