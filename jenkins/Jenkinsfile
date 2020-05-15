@@ -42,8 +42,8 @@ pipeline {
             }
             
         }*/
-	/*def CONTROLLED_ENVIRONMENTS = ['nTest','nStage','nProd']*/  
-	    steps('Deploy approval') 
+	def CONTROLLED_ENVIRONMENTS = ['nTest','nStage','nProd']  
+	    stage('Deploy approval') 
 		    {
 		 if (CONTROLLED_ENVIRONMENTS.contains(ENVIRONMENT))
 			    {
