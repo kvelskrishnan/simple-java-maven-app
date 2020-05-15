@@ -7,10 +7,10 @@ pipeline {
     }*/
     parameters {							
         
-	    string(name: 'Branch/Repo', defaultValue: 'developer', description: 'Specify the branch name')
-		booleanParam(name: 'Build Type = Application', defaultValue: true, description: '')
-        booleanParam(name: 'Build Type = DB', defaultValue: true, description: '')
-        booleanParam(name: 'Build Type = Lambda', defaultValue: true, description: '')
+	    string(name: 'Branch/Repo', defaultValue: '', description: 'Specify the branch name')
+		booleanParam(name: 'Build Type = Application', defaultValue: false, description: '')
+        booleanParam(name: 'Build Type = DB', defaultValue: false, description: '')
+        booleanParam(name: 'Build Type = Lambda', defaultValue: false, description: '')
         string(name: 'Deploy Build Number', defaultValue: '', description: 'Specify the build number to be deployed')
 		choice(choices: 'NA=Build only\nDev\nTest\nStage\nProd', description: 'specify the environment name', name: 'Environment')
 						
