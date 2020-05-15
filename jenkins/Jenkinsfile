@@ -10,7 +10,7 @@ pipeline {
         booleanParam(name: 'Build Type = DB', defaultValue: true, description: 'build')
         booleanParam(name: 'Build Type = Lambda', defaultValue: true, description: 'build')
         string(name: 'Deploy Build Number', defaultValue: '1', description: 'Specify the build number to be deployed')
-		choice(choices: 'Dev\Test\Stage\Prod', description: 'specify the environment name', name: 'Environment')
+		choice(choices: 'Dev\nTest\nStage\nProd', description: 'specify the environment name', name: 'Environment')
 						
     }
     stages {
