@@ -42,14 +42,14 @@ pipeline {
             }
             
         }*/
-	def CONTROLLED_Environment = ['Test','Stage','Prod']  
+	/*def CONTROLLED_Environment = ['Test','Stage','Prod']*/
 	    stage('Deploy approval') 
-		    {
-		 if (CONTROLLED_Environment.contains(Environment))
+		    /*{
+		 if (CONTROLLED_Environment.contains(Environment))*/
 			    {
 			 input "Deploy to ${Environment}"   
             }
-		else{
+		/*else{
 
                echo "Deployment to ${Environment} does not require approval."
 
@@ -57,7 +57,7 @@ pipeline {
 		    
 		
             
-        }
+        }*/
         /*test_run*/
         //https://issues.jenkins-ci.org/browse/JENKINS-27295
 
