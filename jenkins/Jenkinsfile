@@ -47,7 +47,7 @@ pipeline {
 		    /*{
 		 if (CONTROLLED_Environment.contains(Environment))*/
 			    {
-			 input "Deploy to ${Environment}"   
+			 input "Deploy to Prod"   
             }
 		/*else{
 
