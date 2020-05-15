@@ -3,12 +3,23 @@ pipeline {
     /*triggers {
          cron ('* * * * *')       
     }*/
+    parameters {							
+        
+	    string(name: 'Branch/Repo', defaultValue: 'developer', description: 'Specify the branch to build from')
+		booleanParam(name: 'Build Type = Application', defaultValue: true, description: 'build')
+        booleanParam(name: 'Build Type = DB', defaultValue: true, description: 'build')
+        booleanParam(name: 'Build Type = Lambda', defaultValue: true, description: 'build')
+        string(name: 'Deploy Build Number', defaultValue: '1', description: 'Specify the build number to be deployed')
+		choice(choices: 'Dev\nTest\nStage\nProd', description: 'specify the environment name', name: 'Environment')
+						
+    }
     stages {
         stage('checkout') {
             steps {
-                checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/kvelskrishnan/simple-java-maven-app.git']]])
+                checkout([$class: 'GitSCM', branches: [[name: '*/developer']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/kvelskrishnan/simple-java-maven-app.git']]])
             }
         }
+        
         stage('Build') {
             steps {
              sh 'mvn -B -DskipTests clean package'   
