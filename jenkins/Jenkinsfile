@@ -46,7 +46,7 @@ pipeline {
 	    stage('Deploy approval') 
 		    /*{
 		 if (CONTROLLED_Environment.contains(Environment))*/
-			    {
+			  steps  {
 			 input "Deploy to Prod"   
             }
 		/*else{
