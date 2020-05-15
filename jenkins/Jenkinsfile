@@ -50,7 +50,7 @@ pipeline {
             }
             
         }
-        /*test_run_1*/
+        /*test_run*/
         //https://issues.jenkins-ci.org/browse/JENKINS-27295
 
 //DEPLOY_SQL=DEPLOY_SQL=="false/fasle"
