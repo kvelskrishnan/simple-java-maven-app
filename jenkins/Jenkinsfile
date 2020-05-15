@@ -3,7 +3,16 @@ pipeline {
     /*triggers {
          cron ('* * * * *')       
     }*/
-    /*properties([[$class: 'JiraProjectProperty', siteName: 'https://kvelskrishnan.atlassian.net/'], parameters([string(defaultValue: '', description: '', name: 'Repo/Branch', trim: false), booleanParam(defaultValue: false, description: '', name: 'Build type = Application'), booleanParam(defaultValue: false, description: '', name: 'Build type= DB'), booleanParam(defaultValue: false, description: '', name: 'Build type= Application'), string(defaultValue: '', description: '', name: 'Deploy Build Number', trim: false), choice(choices: ['Dev', 'Test', 'Stage', 'Prod'], description: '', name: 'Environment')]), pipelineTriggers([[$class: 'PeriodicFolderTrigger', interval: '1m']])])*/
+    parameters {							
+        
+	    string(name: 'Branch/Repo', defaultValue: 'developer', description: 'Specify the branch to build from')
+		booleanParam(name: 'Build Type = Application', defaultValue: true, description: 'build')
+        booleanParam(name: 'Build Type = DB', defaultValue: true, description: 'build')
+        booleanParam(name: 'Build Type = Lambda', defaultValue: true, description: 'build')
+        string(name: 'Deploy Build Number', defaultValue: '1', description: 'Specify the build number to be deployed')
+		choice(choices: 'Dev\Test\Stage\Prod', description: 'specify the environment name', name: 'Environment')
+						
+    }
     stages {
         stage('checkout') {
             steps {
