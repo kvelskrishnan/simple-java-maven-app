@@ -3,14 +3,14 @@ pipeline {
     /*triggers {
          cron ('* * * * *')       
     }*/
-    
+    properties([ parameters([string(defaultValue: 'developer', description: '', name: 'Branch/Repo', trim: false)]), pipelineTriggers([[$class: 'PeriodicFolderTrigger', interval: '1m']])])
     stages {
         stage('checkout') {
             steps {
                 checkout([$class: 'GitSCM', branches: [[name: '*/developer']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/kvelskrishnan/simple-java-maven-app.git']]])
             }
         }
-        properties([[$class: 'JiraProjectProperty', siteName: 'https://kvelskrishnan.atlassian.net/'], parameters([string(defaultValue: 'developer', description: '', name: 'Branch/Repo', trim: true)]), pipelineTriggers([[$class: 'PeriodicFolderTrigger', interval: '1m']])])
+        
         stage('Build') {
             steps {
              sh 'mvn -B -DskipTests clean package'   
