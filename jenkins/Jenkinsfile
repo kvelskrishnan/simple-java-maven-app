@@ -42,10 +42,17 @@ pipeline {
             }
             
         }*/
+	def CONTROLLED_ENVIRONMENTS = ['Prod','Stage’,'Test']    
         stage('Deploy approval') {
-            steps {
-             input "Deploy to Prod"   
+		 if (CONTROLLED_ENVIRONMENTS.contains(ENVIRONMENT)){
+			 input "Deploy to ${Environment}"   
             }
+		else{
+
+               echo "Deployment to ${ENVIRONMENT} does not require approval."
+
+  }
+		
             
         }
         /*test_run*/
@@ -58,11 +65,6 @@ pipeline {
 //DEPLOY_App=”false/true”
 
  
-
-/*def CONTROLLED_ENVIRONMENTS = ['prod','stage’,'test']*/
-
- 
-
 //Approval gate
 
 /*stage('Deploy approval'){
