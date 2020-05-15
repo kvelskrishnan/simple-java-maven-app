@@ -2,9 +2,9 @@
   
 pipeline {
     agent any
-    triggers {
+    /*triggers {
          pollSCM ('* * * * *')       
-    }
+    }*/
     parameters {							
         
 	    string(name: 'Branch/Repo', defaultValue: '', description: 'Specify the branch name')
