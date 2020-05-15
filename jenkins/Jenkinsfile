@@ -3,6 +3,7 @@ pipeline {
     /*triggers {
          cron ('* * * * *')       
     }*/
+    properties([[$class: 'JiraProjectProperty', siteName: 'https://kvelskrishnan.atlassian.net/'], parameters([string(defaultValue: '', description: '', name: 'Branch/Repo', trim: false)]), pipelineTriggers([[$class: 'PeriodicFolderTrigger', interval: '1m']])])
     stages {
         stage('checkout') {
             steps {
