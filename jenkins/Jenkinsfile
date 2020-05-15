@@ -1,14 +1,27 @@
+
+  
 pipeline {
     agent any
     /*triggers {
          cron ('* * * * *')       
     }*/
+    parameters {							
+        
+	    string(name: 'Branch/Repo', defaultValue: 'developer', description: 'Specify the branch to build from')
+		booleanParam(name: 'Build Type = Application', defaultValue: true, description: 'build')
+        booleanParam(name: 'Build Type = DB', defaultValue: true, description: 'build')
+        booleanParam(name: 'Build Type = Lambda', defaultValue: true, description: 'build')
+        string(name: 'Deploy Build Number', defaultValue: '1', description: 'Specify the build number to be deployed')
+		choice(choices: 'Dev\nTest\nStage\nProd', description: 'specify the environment name', name: 'Environment')
+						
+    }
     stages {
         stage('checkout') {
             steps {
-                checkout([$class: 'GitSCM', branches: [[name: '*/Release']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/kvelskrishnan/simple-java-maven-app.git']]])
+                checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/kvelskrishnan/simple-java-maven-app.git']]])
             }
         }
+        
         stage('Build') {
             steps {
              sh 'mvn -B -DskipTests clean package'   
@@ -33,7 +46,8 @@ pipeline {
         }*/
         stage('Deploy approval') {
             steps {
-             input "Deploy to Prod"   
+             input "Deploy to Prod"
+             
             }
             
         }
@@ -55,27 +69,16 @@ pipeline {
 //Approval gate
 
 /*stage('Deploy approval'){
-
   if (CONTROLLED_ENVIRONMENTS.contains(ENVIRONMENT)){
-
         emailext attachLog: false,
-
                        body: "Deployment ${JOB_BASE_NAME} requires approval for the ${ENVIRONMENT} environment. ${BUILD_URL}input",
-
                        replyTo: 'techops@lifescan.com',
-
                        subject: "Approval required for ${ENVIRONMENT} environment in ${JOB_BASE_NAME}",
-
                        to: APPROVER_LIST
-
         def feedback = input submitter: APPROVER_LIST, message: "This will deploy to the controlled environment $ENVIRONMENT"
-
   } else{
-
                echo "Deployment to ${ENVIRONMENT} does not require approval."
-
   }
-
 }*/
 
  
