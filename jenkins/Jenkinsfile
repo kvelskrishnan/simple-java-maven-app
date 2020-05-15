@@ -3,7 +3,7 @@ pipeline {
     /*triggers {
          cron ('* * * * *')       
     }*/
-    properties([ parameters([string(defaultValue: 'developer', description: '', name: 'Branch/Repo', trim: false)]), pipelineTriggers([[$class: 'PeriodicFolderTrigger', interval: '1m']])])
+    properties([ parameters([string(defaultValue: '', description: '', name: 'Branch/Repo', trim: false)]), pipelineTriggers([[$class: 'PeriodicFolderTrigger', interval: '1m']])])
     stages {
         stage('checkout') {
             steps {
