@@ -43,7 +43,9 @@ pipeline {
             
         }*/
 	def CONTROLLED_ENVIRONMENTS = ['nTest','nStage','nProd']    
-        stage('Deploy approval') {
+	    stage('Deploy approval') {
+		    def CONTROLLED_ENVIRONMENTS = ['nTest','nStage','nProd']   
+		    {
 		 if (CONTROLLED_ENVIRONMENTS.contains(ENVIRONMENT)){
 			 input "Deploy to ${Environment}"   
             }
@@ -52,6 +54,7 @@ pipeline {
                echo "Deployment to ${ENVIRONMENT} does not require approval."
 
   }
+		    }
 		
             
         }
