@@ -11,7 +11,7 @@ pipeline {
         booleanParam(name: 'Build Type = DB', defaultValue: false, description: '')
         booleanParam(name: 'Build Type = Lambda', defaultValue: false, description: '')
         string(name: 'Deploy Build Number', defaultValue: '', description: 'Specify the build number to be deployed')
-		    choice(choices: 'NA=Build only\nDev\nTest\nStage\nProd', description: 'specify the environment name', name: 'Environment')		
+		    choice(choices: 'NA=Build only\nDev\nTest\nStage\nProd', description: 'specify the environment name', name: 'environment')		
     }
     stages {
         stage('checkout') {
@@ -45,11 +45,11 @@ pipeline {
         stage('Deploy') {
           steps {
             script {
-              if (Environment == "Test" || Environment == "Stage" || Environment == "Prod") {
+              if (params.environment == "Test" || params.environment == "Stage" || params.environment == "Prod") {
                 input "Deploy to environment"
               }
               else {
-                echo Environment
+                echo "Deploying"
               }
             }
           }
