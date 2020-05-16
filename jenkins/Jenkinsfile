@@ -46,7 +46,7 @@ pipeline {
           steps {
             script {
               if (params.environment == "Test" || params.environment == "Stage" || params.environment == "Prod") {
-                input "Deploy to environment"
+                input "Deploy to environment ${params.environment}?"
               }
               else {
                 echo "Deploying"
