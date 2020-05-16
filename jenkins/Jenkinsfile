@@ -44,7 +44,7 @@ pipeline {
             
         }*/
         stage('Deploy approval') {
-          if (Environment = Test, Stage, Prod)
+          if (Environment == Test or == Stage or == Prod)
             steps {
              input "Deploy to ${Environment}"
              
