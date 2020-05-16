@@ -44,18 +44,14 @@ pipeline {
             
         }*/
         stage('Deploy') {
-          // if (Environment == "Test" || Environment == "Stage" || Environment == "Prod") {
-            steps {
-             input "Deploy to environment"
-             
+          steps {
+            if (Environment == "Test" || Environment == "Stage" || Environment == "Prod") {
+              input "Deploy to environment"
             }
-         /*} else {
-            steps {
-             echo "Deploying"
-             
+            else {
+              echo "Deploying"
             }
-          }*/
-            
+          }
         }
         /*test_run*/
         //https://issues.jenkins-ci.org/browse/JENKINS-27295
