@@ -44,16 +44,17 @@ pipeline {
             
         }*/
         stage('Deploy approval') {
-          if (Environment == "Test" || Environment == "Stage" || Environment == "Prod")
+          if (Environment == "Test" || Environment == "Stage" || Environment == "Prod") {
             steps {
              input "Deploy to ${Environment}"
              
             }
-          else
+         } else {
             steps {
              echo Deploying
              
             }
+          }
             
         }
         /*test_run*/
