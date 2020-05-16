@@ -45,11 +45,13 @@ pipeline {
         }*/
         stage('Deploy') {
           steps {
-            if (Environment == "Test" || Environment == "Stage" || Environment == "Prod") {
-              input "Deploy to environment"
-            }
-            else {
-              echo "Deploying"
+            script {
+              if (Environment == "Test" || Environment == "Stage" || Environment == "Prod") {
+                input "Deploy to environment"
+              }
+              else {
+                echo "Deploying"
+              }
             }
           }
         }
