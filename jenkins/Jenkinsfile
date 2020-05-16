@@ -43,18 +43,18 @@ pipeline {
             }
             
         }*/
-        stages('Deploy') {
-          if (Environment == "Test" || Environment == "Stage" || Environment == "Prod") {
+        stage('Deploy') {
+          // if (Environment == "Test" || Environment == "Stage" || Environment == "Prod") {
             steps {
              input "Deploy to environment"
              
             }
-         } else {
+         /*} else {
             steps {
-             echo Deploying
+             echo "Deploying"
              
             }
-          }
+          }*/
             
         }
         /*test_run*/
