@@ -43,7 +43,7 @@ pipeline {
             }
             
         }*/
-        stage('Deploy') {
+        stages('Deploy') {
           if (Environment == "Test" || Environment == "Stage" || Environment == "Prod") {
             steps {
              input "Deploy to environment"
